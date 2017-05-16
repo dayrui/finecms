@@ -83,22 +83,20 @@ class Root extends M_Controller {
 				} elseif ($uid == -4) {
 					exit(dr_json(0, fc_lang('同一IP在限制时间内注册过多'), 'username'));
 				} elseif ($uid == -5) {
-					exit(dr_json(0, fc_lang('Ucenter：会员名称不合法'), 'username'));
+					exit(dr_json(0, fc_lang('UCSSO：会员名称不合法'), 'username'));
 				} elseif ($uid == -6) {
-					exit(dr_json(0, fc_lang('Ucenter：包含不允许注册的词语'), 'username'));
+					exit(dr_json(0, fc_lang('UCSSO：包含不允许注册的词语'), 'username'));
 				} elseif ($uid == -7) {
-					exit(dr_json(0, fc_lang('Ucenter：Email格式有误'), 'username'));
+					exit(dr_json(0, fc_lang('UCSSO：Email格式有误'), 'username'));
 				} elseif ($uid == -8) {
-					exit(dr_json(0, fc_lang('Ucenter：Email不允许注册'), 'username'));
+					exit(dr_json(0, fc_lang('UCSSO：Email不允许注册'), 'username'));
 				} elseif ($uid == -9) {
-					exit(dr_json(0, fc_lang('Ucenter：Email已经被注册'), 'username'));
+					exit(dr_json(0, fc_lang('UCSSO：Email已经被注册'), 'username'));
 				} elseif ($uid == -10) {
 					exit(dr_json(0, fc_lang('手机号码必须是11位的整数'), 'phone'));
 				} elseif ($uid == -11) {
 					exit(dr_json(0, fc_lang('该手机号码已经注册'), 'phone'));
 				}
-			} elseif ($check['adminid'] > 0) { // 已经属于管理组
-				exit(dr_json(0, fc_lang('该会员已经是管理组了'), 'username'));
 			}
 			
 			$menu = array();
@@ -172,7 +170,6 @@ class Root extends M_Controller {
 			}
             // 修改密码
 			if ($password) {
-				defined('UC_KEY') && uc_user_edit($this->member['username'], '', $password, '', 1);
                 if (defined('UCSSO_API')) {
                     $rt = ucsso_edit_password($this->uid, $password);
                     // 修改失败
@@ -202,7 +199,6 @@ class Root extends M_Controller {
     public function del() {
 
         $id = (int)$this->input->get('id');
-		$data = $this->member_model->get_admin_member($id);
 		// 认证权限
 		if ($id == 1) {
 			exit(dr_json(0, fc_lang('无法删除创始人管理权限')));
@@ -224,8 +220,6 @@ class Root extends M_Controller {
                        ->get($this->db->dbprefix('member'))
                        ->row_array();
 		!$result && exit(dr_json(1, ''));
-        // 不存在，注册新会员
-		$result['adminid'] > 0 && exit(dr_json(2, fc_lang('该会员已经是管理组了')));
         // 已经属于管理组
 		exit(dr_json(0, '', $result['uid'])); // 已经注册会员
 	}

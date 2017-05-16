@@ -55,7 +55,6 @@ class M_Controller extends CI_Controller {
         // 全局化站点变量
         $config1 = require WEBPATH.'config/system.php'; // 加载网站系统配置文件
         !$config1['SYS_THUMB_DIR'] && $config1['SYS_THUMB_DIR'] = 'uploadfile/thumb';
-
         $this->load->library('session');
         $domain = require WEBPATH.'config/domain.php'; // 加载站点域名配置文件
         $sitecfg = directory_map(WEBPATH.'config/site/'); // 加载全部站点的配置文件
@@ -265,6 +264,9 @@ class M_Controller extends CI_Controller {
             'site_info' => $this->site_info,
             'is_mobile' => $this->template->mobile,
         ));
+
+
+        $this->hooks->call_hook('finecms-init'); // 挂钩点
     }
 
 
