@@ -10,6 +10,6 @@
 
 return array(
 
-	'www.test.com'                  => 1,
+	'www.gyb.com'                   => 1,
 
 );
