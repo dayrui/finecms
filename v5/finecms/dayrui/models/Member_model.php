@@ -245,7 +245,6 @@ class Member_model extends CI_Model {
         $select = $this->db
                        ->from($this->db->dbprefix('admin').' AS a')
                        ->join($this->db->dbprefix('member').' AS b', 'a.uid=b.uid', 'left');
-        $roleid && $select->where('b.adminid', $roleid);
         $keyword && $select->like('b.username', $keyword);
 
         return $select->get()->result_array();
