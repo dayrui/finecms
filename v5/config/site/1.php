@@ -39,7 +39,7 @@ return array(
 	'SITE_IMAGE_COLOR'              => '', //
 	'SITE_IMAGE_SIZE'               => '', //
 	'SITE_IMAGE_TEXT'               => '', //
-	'SITE_DOMAIN'                   => '', //网站的域名
+	'SITE_DOMAIN'                   => 'www.gyb.com', //网站的域名
 	'SITE_IMAGE_CONTENT'            => 0, //是否内容编辑器显示水印图片
 
 );
