@@ -177,9 +177,21 @@ class Content extends M_Controller {
         // 存储当前页URL
         $this->_set_back_url('content/index', $param);
 
+        // 插件判断
+        $clink = array();
+        $local = $this->local_app();
+        if ($local) {
+            foreach ($local as $t) {
+                if ($t['clink']) {
+                    $clink[] = $t['clink'];
+                }
+            }
+        }
+
         $this->template->assign(array(
             'mid' => $this->mid,
             'list' => $list,
+            'clink' => $clink,
             'param' => $param,
             'field' => $this->field,
             'pages' => $this->get_pagination(dr_url('content/index', $param), $param['total']),

@@ -161,6 +161,20 @@ function dr_status(id, v) {
 						<td>{dr_date($t.updatetime, NULL, 'red')}</td>
 						<td><label>{if $t.status == 9}<a class="btn blue btn-xs" href="javascript:dr_status('{$t.id}', '{$t.status}');">{fc_lang('正常')}</a>{else}<a class="btn red btn-xs" href="javascript:dr_status({$t.id}, '{$t.status}');">{fc_lang('关闭')}</a>{/if}</label></td>
 						<td>
+							{if $clink}
+							<label>
+								<div class="btn-group">
+									<button type="button" class="btn dark btn-xs dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-delay="1000" data-close-others="true"> <i class="fa fa-plug"></i> {fc_lang('插件')}
+										<i class="fa fa-angle-down"></i>
+									</button>
+									<ul class="dropdown-menu" role="menu">
+										{loop $clink $a}
+										<li><a class="onloading" href="{str_replace(array('{mid}', '{id}'), array($mid, $t.id), $a.url)}"><i class="{$a.icon}"></i> {$a.name} {if $a.field}<span class="badge badge-info"> {intval($t[$a['field']])} </span>{/if} </a></li>
+										{/loop}
+									</ul>
+								</div>
+							</label>
+							{/if}
 							<label>
 								<a href="{dr_url('content/edit',array('mid'=>$mid, 'id'=>$t.id))}" class="btn btn-xs green onloading">
 									<i class="fa fa-edit"></i> {fc_lang('修改')}</a>
