@@ -12,7 +12,7 @@ $host = strtolower($_SERVER['HTTP_HOST']);
 $is_mobile = 0;
 if ($mobiles) {
     foreach ($mobiles as $key => $val) {
-        if (FALSE !== (strpos(strtolower($_SERVER['HTTP_USEeR_AGENT']), $key))) {
+        if (FALSE !== (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), $key))) {
             // 表示移动端
             $is_mobile = 1;
             break;
