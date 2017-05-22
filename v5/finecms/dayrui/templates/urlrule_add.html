@@ -123,6 +123,14 @@ function dr_set_type(id) {
 				</div>
 			</div>
 
+			<div class="form-group ">
+				<label class="col-md-2 control-label">{fc_lang('连接符号')}：</label>
+				<div class="col-md-9">
+					<label>{dr_field_input('catjoin', 'Text', array('option' => array('width' => '100%')), $data['value']['catjoin'] ? $data['value']['catjoin'] : '/')}</label>
+					<span class="help-block"> {fc_lang('针对{pdirname}的连接符号，默认为"/"，如：china[连接符号]news')} </span>
+				</div>
+			</div>
+
 
 		</div>
 	</div>
