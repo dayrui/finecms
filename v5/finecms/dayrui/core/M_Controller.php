@@ -396,7 +396,7 @@ class M_Controller extends CI_Controller {
         }
 
         $return = NULL;
-        eval('$return = $data'.$var.';');
+        @eval('$return = $data'.$var.';');
 
         return $return;
     }
@@ -1950,6 +1950,9 @@ class M_Controller extends CI_Controller {
         $this->load->model('content_model');
         $this->content_model->init($this->module[$this->dir]);
 
+        $this->template->assign(array(
+            'module' => $this->module,
+        ));
     }
 
     // 获取返回时的URL

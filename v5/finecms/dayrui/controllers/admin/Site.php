@@ -75,10 +75,10 @@ class Site extends M_Controller {
 			$this->load->library('dconfig');
 			$data = $this->input->post('data', TRUE);
 			$domain	= require WEBPATH.'config/domain.php';
-			if (!$data['name']) {
-                exit(dr_json(0, '', 'name'));
+            if (!$data['name']) {
+                exit(dr_json(0, fc_lang('网站名字不存在'), 'name'));
             } elseif (!preg_match('/[\w-_\.]+\.[\w-_\.]+/i', $data['domain'])) {
-                exit(dr_json(0, '', 'domain'));
+                exit(dr_json(0, fc_lang('域名不规范'), 'domain'));
             } elseif (in_array($data['domain'], $domain)) {
                 exit(dr_json(0, fc_lang('%s已经存在', $data['domain']), 'domain'));
             } elseif ($this->db->where('domain', $data['domain'])->count_all_results('site')) {
