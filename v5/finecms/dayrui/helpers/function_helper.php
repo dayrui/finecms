@@ -8,8 +8,6 @@
  */
 
 
-
-
 /**
  * 多语言输出
  *
@@ -944,9 +942,14 @@ function get_module($dirname, $siteid = SITE_ID) {
 
     $ci = &get_instance();
     $ci->load->library('dcache');
-    $data = $ci->get_cache('module');
+    $data = $ci->get_cache('module'); // 全部模型
+    if (!$data[$dirname]) {
+        return array();
+    }
 
-    return $data;
+    $data[$dirname]['category'] = $ci->get_cache('category-'.$siteid);
+
+    return $data[$dirname];
 }
 
 /**

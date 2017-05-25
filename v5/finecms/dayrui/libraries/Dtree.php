@@ -130,7 +130,7 @@ class Dtree {
 				
 				@extract($value);
 				
-				$pid == 0 && $str_group ? eval("\$nstr = \"$str_group\";") : eval("\$nstr = \"$str\";");
+				$pid == 0 && $str_group ? @eval("\$nstr = \"$str_group\";") : @eval("\$nstr = \"$str\";");
 				$this->ret.= $nstr;
 				$nbsp = $this->nbsp;
 				$this->get_tree($id, $str, $sid, $adds.$k.$nbsp, $str_group);
@@ -164,8 +164,8 @@ class Dtree {
 				$selected = $this->have($sid, $id) ? 'selected' : '';
 				
 				@extract($a);
-				
-				eval("\$nstr = \"$str\";");
+
+                @eval("\$nstr = \"$str\";");
 				$this->ret.= $nstr;
 				$this->get_tree_multi($id, $str, $sid, $adds.$k.'&nbsp;');
 				$number++;
@@ -217,9 +217,9 @@ class Dtree {
 				if (!$now && $html_disabled) continue;
 
 				if (empty($html_disabled)) {
-					eval("\$nstr = \"$str\";");
+                    @eval("\$nstr = \"$str\";");
 				} else {
-					eval("\$nstr = \"$str2\";");
+                    @eval("\$nstr = \"$str2\";");
 				}
 				
 				$this->ret.= $nstr;
@@ -252,7 +252,7 @@ class Dtree {
 			} else {				
 				if ($str) {
 					@extract(array_iconv($c, CHARSET, 'utf-8'));
-					eval("\$data[$n]['text'] = \"$str\";");
+                    @eval("\$data[$n]['text'] = \"$str\";");
 				} else {
 					$data[$n]['text'] = iconv(CHARSET, 'utf-8', $c['catname']);
 				}

@@ -346,7 +346,7 @@ class Template {
 
         // 替换直接变量输出
         $replace_array = array(
-            "<?php \$cache = \$this->_cache_var('\\1'); eval('echo \$cache'.\$this->_get_var('\\2').';');unset(\$cache); ?>",
+            "<?php \$cache = \$this->_cache_var('\\1'); @eval('echo \$cache'.\$this->_get_var('\\2').';');unset(\$cache); ?>",
             "<?php echo \$\\1['\\2']['\\3']['\\4']; ?>",
             "<?php echo \$\\1['\\2']['\\3']; ?>",
             "<?php echo \$\\1['\\2']; ?>",

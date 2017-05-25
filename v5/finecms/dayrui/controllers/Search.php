@@ -29,6 +29,8 @@ class Search extends M_Controller {
         }
 
         $this->dir = $get['mid'];
+        $this->_module_init($this->dir);
+
         $this->load->model('search_model');
         $this->search_model->init($this->dir);
 
