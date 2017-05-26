@@ -91,6 +91,9 @@ class Db extends M_Controller {
         if (IS_POST) {
             $id = $this->input->post('id');
             $sql = str_replace('{dbprefix}', $this->db->dbprefix, $this->input->post('sql'));
+            if (preg_match('/select(.*)into outfile(.*)/i', $sql)) {
+                $this->admin_msg(fc_lang('存在非法select'));
+            }
             $sql_data = explode(';SQL_FINECMS_EOL', trim(str_replace(array(PHP_EOL, chr(13), chr(10)), 'SQL_FINECMS_EOL', $sql)));
             if ($sql_data) {
                 $db = isset($this->site[$id]) && $this->site[$id] ? $this->site[$id] : $this->db;

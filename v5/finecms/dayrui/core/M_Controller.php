@@ -1628,9 +1628,7 @@ class M_Controller extends CI_Controller {
         } else {
             set_cookie('member_uid', 0, -1);
             set_cookie('member_cookie', '', -1);
-            if ($this->uid) {
-                $this->db->delete('member_online', 'uid='.$this->uid);
-            }
+
         }
     }
 
