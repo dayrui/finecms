@@ -136,6 +136,7 @@ class Category extends M_Controller {
         $str = "<tr class='\$class'>";
         $str.= "<td align='right'><input name='ids[]' type='checkbox' class='dr_select toggle md-check' value='\$id' /></td>";
         $str.= "<td><input class='input-text displayorder' type='text' name='data[\$id][displayorder]' value='\$displayorder' /></td>";
+        $str.= "<td>\$id</td>";
         $str.= "<td>\$spacer<a class='onloading' href='".dr_url('category/edit')."&id=\$id'>\$name</a>  \$parent</td>";
         $str.= "<td>\$dirname</td>";
         $str.= "<td style='text-align: center'>\$type</td>";
