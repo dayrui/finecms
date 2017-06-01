@@ -193,8 +193,11 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $file = trim(str_replace(array('../', '\\'), array('', '/'), $this->input->get('file')), '/');
-		!is_file($this->path.$file) &&  $this->admin_msg(fc_lang('文件不存在'));
+        $file = trim(str_replace(array('../', '\\', '..'), array('', '/', ''), $this->input->get('file')), '/');
+        !is_file($this->path.$file) &&  $this->admin_msg(fc_lang('文件不存在'));
+        if (!in_array(strtolower(strrchr($file, '.')), array('.html', '.js', '.css'))) {
+            $this->admin_msg(fc_lang('文件扩展名不规范'));
+        }
 		
 		if (IS_POST) {
 			$code = $this->input->post('code');
@@ -220,7 +223,7 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $file = trim(str_replace(array('../', '\\'), array('', '/'), $this->input->get('file')), '/');
+        $file = trim(str_replace(array('../', '\\', '..'), array('', '/'), $this->input->get('file')), '/');
 		!is_file($this->path.$file) && $this->admin_msg(fc_lang('文件不存在'));
 
         $path = dirname($this->path.$file);
@@ -244,7 +247,7 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $file = trim(str_replace(array('../', '\\'), array('', '/'), $this->input->get('file')), '/');
+        $file = trim(str_replace(array('../', '\\', '..'), array('', '/'), $this->input->get('file')), '/');
 		!$file && exit(dr_json(0, fc_lang('文件或者目录格式不正确')));
 		
 		if (is_dir($this->path.$file)) {
