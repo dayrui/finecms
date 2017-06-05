@@ -8,7 +8,54 @@
 	
 class System_model extends CI_Model {
 
-	
+    /*
+     * 保存配置文件
+     */
+    public function save_config($system, $config, $action = '') {
+
+        $data = array();
+        $this->load->library('dconfig');
+        if ($action == 'file') {
+            $cfg = $config;
+            $config = $system;
+            $config['SYS_ATTACHMENT_DB'] = $cfg['SYS_ATTACHMENT_DB'];
+            $config['SYS_ATTACHMENT_DIR'] = $cfg['SYS_ATTACHMENT_DIR'];
+            $config['SYS_UPLOAD_DIR'] = $cfg['SYS_UPLOAD_DIR'];
+            $config['SYS_ATTACHMENT_URL'] = $cfg['SYS_ATTACHMENT_URL'];
+            $config['SYS_THUMB_DIR'] = $cfg['SYS_THUMB_DIR'];
+        }
+
+        foreach ($this->config as $i => $note) {
+            // 处理逻辑值
+            if (in_array($i, array('SYS_AUTO_CACHE', 'SYS_ATTACHMENT_DB', 'SYS_DEBUG',
+                'SYS_CATE_SHARE',
+                'SYS_UPDATE',
+                'SYS_HTTPS',
+                'SYS_NEWS', 'SYS_LOG',
+                'SITE_ADMIN_CODE', 'SYS_MEMCACHE', 'SYS_CRON_QUEUE', 'SYS_SYNC_ADMIN'))) {
+                $value = isset($config[$i]) ? $config[$i] : 0;
+            } else {
+                $value = isset($config[$i]) ? $config[$i] : $system[$i];
+            }
+            if (strlen($value) == 4 && $value == 'TRUE') {
+                $value = 1;
+            } elseif (strlen($value) == 5 && $value == 'FALSE') {
+                $value = 0;
+            } elseif ($i == 'SYS_HELP_URL') {
+                $value = $system['SYS_HELP_URL'];
+            } elseif ($i == 'SYS_UPLOAD_DIR') {
+                $value = addslashes($value);
+            } elseif ($i == 'SYS_KEY' && strpos($value, '***') !== FALSE) {
+                $value = $system['SYS_KEY'];
+            }
+            $data[$i] = $value;
+        }
+
+        $this->dconfig->file(WEBPATH.'config/system.php')->note('系统配置文件')->space(32)->to_require_one($this->config, $data);
+
+        return $data;
+    }
+
 	/*
 	 * 缓存表
 	 *

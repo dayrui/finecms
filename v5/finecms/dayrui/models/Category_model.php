@@ -307,10 +307,14 @@ class Category_model extends CI_Model {
                 $child = is_numeric($childids) ? 0 : 1;
                 $pdirname = $this->get_pdirname($catid);
 
-                if ($cat['mid'] && $cat['pid']) {
-                    list($pmid, $ids) = $this->get_parent_mid($this->categorys, $cat['pid']);
-                    $pmid && $this->db->where_in('id', $ids)->update($this->tablename, array('mid' => $pmid));
+                if (define('SYS_CAT_MODULE') && SYS_CAT_MODULE) {
+                    // 栏目模型唯一开启后
+                    if ($cat['mid'] && $cat['pid']) {
+                        list($pmid, $ids) = $this->get_parent_mid($this->categorys, $cat['pid']);
+                        $pmid && $this->db->where_in('id', $ids)->update($this->tablename, array('mid' => $pmid));
+                    }
                 }
+
 
                 if ($categorys[$catid]['pdirname'] != $pdirname
                     || $categorys[$catid]['pids'] != $pids

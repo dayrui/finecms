@@ -7,6 +7,55 @@
  */
 class System extends M_Controller {
 
+
+
+    /**
+     * 配置
+     */
+    public function config() {
+
+        // 加载网站系统配置文件
+        $data = require WEBPATH.'config/system.php';
+
+        if (IS_POST) {
+            $this->load->library('dconfig');
+            $post = $this->input->post('data', true);
+            $save = array(
+                'SYS_DEBUG',
+                'SYS_AUTO_CACHE',
+                'SYS_CAT_MODULE',
+                'SYS_LOG',
+                'SITE_ADMIN_CODE',
+                'SITE_ADMIN_PAGESIZE',
+                'SYS_EMAIL',
+                'SYS_KEY',
+            );
+            foreach ($save as $key) {
+                if ($key == 'SYS_KEY') {
+                    $value = $post[$key] == '***' ? $data[$key] : $post[$key];
+                } else {
+                    $value = isset($post[$key]) ? $post[$key] : 0;
+                    $value === 'TRUE' && $value = 1;
+                }
+                $data[$key] = $value;
+            }
+
+            $this->dconfig->file(WEBPATH.'config/system.php')->note('系统配置文件')->space(32)->to_require($data);
+
+            $this->system_log('修改系统配置'); // 记录日志
+            $this->admin_msg(fc_lang('操作成功，正在刷新...'), dr_url('system/'.$this->router->method), 1);
+        }
+
+
+        $this->template->assign(array(
+            'page' => 0,
+            'data' => $data,
+            'menu' => $this->get_menu_v3(array(
+                fc_lang('系统配置') => array('admin/system/config', 'cog'),
+            ))
+        ));
+        $this->template->display('system_index.html');
+    }
 	
 	/**
      * 系统操作日志
