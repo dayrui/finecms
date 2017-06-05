@@ -62,6 +62,11 @@ return array(
                 'icon' => 'fa fa-cog',
                 'menu' => array(
                     array(
+                        'name' => '后台设置',
+                        'uri' => 'system/config',
+                        'icon' => 'fa fa-cog',
+                    ),
+                    array(
                         'name' => '网站设置',
                         'uri' => 'site/config',
                         'icon' => 'fa fa-cog',
