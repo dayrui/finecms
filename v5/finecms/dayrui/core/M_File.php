@@ -45,7 +45,7 @@ class M_File extends M_Controller {
         $this->_init();
 
 		$this->load->helper('directory');
-		$dir = trim(str_replace('.', '', $this->input->get('dir')), '/');
+		$dir = trim(str_replace('.', '', $this->input->get('dir',true)), '/');
 		$path = $dir ? $this->path.$dir.'/' : $this->path;
 		$data = directory_map($path, 1);
 		$list = array();
@@ -98,7 +98,7 @@ class M_File extends M_Controller {
         $this->_init();
 
         $this->load->helper('directory');
-		$dir = trim(str_replace('.', '', $this->input->get('dir')), '/');
+		$dir = trim(str_replace('.', '', $this->input->get('dir',true)), '/');
 		$path = $dir ? $this->path.$dir.'/' : $this->path;
 		$data = directory_map($path, 1);
 		$list = array();
@@ -149,7 +149,7 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $dir = trim(str_replace('.', '', $this->input->get('dir')), '/');
+        $dir = trim(str_replace('.', '', $this->input->get('dir',true)), '/');
 		$path = $dir ? $this->path.$dir.'/' : $this->path;
 		$error = $file = '';
 		!is_dir($path) && exit('<p style="padding:10px 20px 20px 20px">'.fc_lang('文件目录不存在').'</p>');
@@ -193,7 +193,7 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $file = trim(str_replace(array('../', '\\', '..'), array('', '/', ''), $this->input->get('file')), '/');
+        $file = trim(str_replace(array('../', '\\', '..'), array('', '/', ''), $this->input->get('file',true)), '/');
         !is_file($this->path.$file) &&  $this->admin_msg(fc_lang('文件不存在'));
         if (!in_array(strtolower(strrchr($file, '.')), array('.html', '.js', '.css'))) {
             $this->admin_msg(fc_lang('文件扩展名不规范'));
@@ -223,7 +223,7 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $file = trim(str_replace(array('../', '\\', '..'), array('', '/'), $this->input->get('file')), '/');
+        $file = trim(str_replace(array('../', '\\', '..'), array('', '/'), $this->input->get('file',true)), '/');
 		!is_file($this->path.$file) && $this->admin_msg(fc_lang('文件不存在'));
 
         $path = dirname($this->path.$file);
@@ -247,7 +247,7 @@ class M_File extends M_Controller {
 
         $this->_init();
 
-        $file = trim(str_replace(array('../', '\\', '..'), array('', '/'), $this->input->get('file')), '/');
+        $file = trim(str_replace(array('../', '\\', '..'), array('', '/'), $this->input->get('file',true)), '/');
 		!$file && exit(dr_json(0, fc_lang('文件或者目录格式不正确')));
 		
 		if (is_dir($this->path.$file)) {
