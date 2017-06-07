@@ -67,12 +67,9 @@
         }
         $(function(){
             init_iframe();
-            if ($(window).width() <= 824) {
-                $(".hidden-480").hide();
+            if ($(window).width() <= 800) {
+                alert("你的浏览器太小，推荐使用1024以上浏览器");
             }
-            {if IS_MOBILE}
-                $(".hidden-480").hide();
-            {/if}
             wSize();
 
             $("#sitelist li").click(function(){
@@ -285,7 +282,6 @@
     <div class="page-header-inner ">
         <div class="page-logo">
             <a href="{SITE_URL}" style="padding-top: 10px;" target="_blank"><img src="{THEME_PATH}logo.png" /> </a>
-            <div class="menu-toggler sidebar-toggler"> </div>
         </div>
 
         <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"> </a>
@@ -303,13 +299,7 @@
                 </li>
                 {php $i=0;}
                 {/loop}
-
-
-
-
-
             </ul>
-
         </div>
         <div id="_right_menu" class="top-menu">
 

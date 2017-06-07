@@ -155,6 +155,15 @@ class Install extends CI_Controller {
                         file_get_contents(WEBPATH.'cache/install/install.sql')
                     ));
 
+                    if ($data['demo']) {
+                        // 导入默认数据
+                        $this->_query(str_replace(
+                            array('{dbprefix}', '{site_url}'),
+                            array($this->db->dbprefix, strtolower($_SERVER['HTTP_HOST'])),
+                            file_get_contents(WEBPATH.'cache/install/default.sql')
+                        ));
+                    }
+
                     exit(dr_json(1, dr_url('install/index', array('step' => $step + 1))));
                 }
                 break;
