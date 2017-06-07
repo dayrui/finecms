@@ -267,7 +267,7 @@ class Home extends M_Controller {
     function mbonline() {
 
         $this->template->assign(array(
-            'url' => 'http://www.dayrui.com/shop/search-template-v-1-cxbb-1-iscms-1.html',
+            'url' => 'http://v5.finecms.net/shop/search-template-v-1-cxbb-1-iscms-1.html',
         ));
         $this->template->display('online.html');
     }
@@ -275,7 +275,7 @@ class Home extends M_Controller {
     function cjonline() {
 
         $this->template->assign(array(
-            'url' => 'http://www.dayrui.com/shop/search-app-v-1-cxbb-1-iscms-1.html',
+            'url' => 'http://v5.finecms.net/shop/search-app-v-1-cxbb-1-iscms-1.html',
         ));
         $this->template->display('online.html');
     }

@@ -39,11 +39,6 @@ return array(
                         'uri' => 'system/index',
                         'icon' => 'fa fa-calendar',
                     ),
-                    array(
-                        'name' => '程序升级',
-                        'uri' => 'upgrade/index',
-                        'icon' => 'fa fa-refresh',
-                    ),
                 )
             ),
 
@@ -213,11 +208,6 @@ return array(
                         'uri' => 'theme/index',
                         'icon' => 'fa fa-css3',
                     ),
-                    array(
-                        'name' => '模板商城',
-                        'uri' => 'home/mbonline',
-                        'icon' => 'fa fa-shopping-cart',
-                    ),
                 )
             ),
 
@@ -250,10 +240,37 @@ return array(
                         'uri' => 'db/index',
                         'icon' => 'fa fa-database',
                     ),
+                )
+            ),
+
+        )
+    ),
+
+
+    array(
+        'name' => '云服务',
+        'mark' => 'mycloud',
+        'icon' => 'fa fa-cloud',
+        'menu' => array(
+            array(
+                'name' => '云服务',
+                'mark' => 'mycloud-app',
+                'icon' => 'fa fa-cloud',
+                'menu' => array(
                     array(
                         'name' => '插件商城',
                         'uri' => 'home/cjonline',
-                        'icon' => 'fa fa-shopping-cart',
+                        'icon' => 'fa fa-plug',
+                    ),
+                    array(
+                        'name' => '模板商城',
+                        'uri' => 'home/mbonline',
+                        'icon' => 'fa fa-code',
+                    ),
+                    array(
+                        'name' => '程序升级',
+                        'uri' => 'upgrade/index',
+                        'icon' => 'fa fa-refresh',
                     ),
                 )
             ),
