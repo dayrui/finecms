@@ -66,7 +66,7 @@ class M_File extends M_Controller {
                     if (in_array($ext, array('html', 'html', 'js', 'css'))) {
                         $eurl = dr_url($this->template->get_value('furi').'edit', array('file' => $dir.'/'.$t));
                     } elseif (in_array($ext, array('jpg', 'gif', 'png'))) {
-                        $eurl = ''.str_replace(FCPATH, SITE_URL, $this->path).trim($dir.'/'.$t, '/').'" target="_blank"';
+                        $eurl = ''.str_replace(WEBPATH, SITE_URL, $this->path).trim($dir.'/'.$t, '/').'" target="_blank"';
                     } else {
                         $eurl = 'javascript:;';
                     }
@@ -85,7 +85,6 @@ class M_File extends M_Controller {
 			'path' => $path,
 			'list' => $list,
 			'parent' => dirname($dir),
-            'upload' => 'dr_upload_files2(\''.dr_url('api/upload', array('path' => $path)).'\')',
 		));
 		$this->template->display('file_index.html');
 	}
@@ -118,7 +117,7 @@ class M_File extends M_Controller {
                     if (in_array($ext, array('html', 'html', 'js', 'css'))) {
                         $eurl = dr_url($this->template->get_value('furi').'edit', array('file' => $dir.'/'.$t, 'ismb'=>1));
                     } elseif (in_array($ext, array('jpg', 'gif', 'png'))) {
-                        $eurl = ''.str_replace(FCPATH, SITE_URL, $this->path).trim($dir.'/'.$t, '/').'" target="_blank"';
+                        $eurl = ''.str_replace(WEBPATH, SITE_URL, $this->path).trim($dir.'/'.$t, '/').'" target="_blank"';
                     } else {
                         $eurl = 'javascript:;';
                     }
@@ -209,7 +208,7 @@ class M_File extends M_Controller {
 		$this->template->assign(array(
 			'path' => $this->path.$file,
 			'back' => dr_url($furi.($this->input->get('ismb') ? 'mobile' : 'index'), array('dir'=> dirname($file), 'ismb' => $this->input->get('ismb'))),
-			'body' => htmlentities(file_get_contents($this->path.$file)),
+			'body' => in_array(strtolower(strrchr($file, '.')), array('.js')) ? file_get_contents($this->path.$file) : htmlentities(file_get_contents($this->path.$file), ENT_COMPAT,'UTF-8'),
 
 		));
 		$this->template->display('file_edit.html');
