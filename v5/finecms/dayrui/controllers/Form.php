@@ -20,7 +20,7 @@ class Form extends M_Controller {
      */
     public function __construct() {
         parent::__construct();
-        $this->mid = $this->input->get('mid');
+        $this->mid = dr_safe_replace($this->input->get('mid', true));
         $this->form = $this->get_cache('form-name-'.SITE_ID,  $this->mid);
         if (!$this->form) {
             $this->admin_msg(fc_lang('表单['.$this->mid.']不存在'));

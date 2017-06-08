@@ -360,11 +360,9 @@ class Api extends M_Controller {
             $p[$item[0]] = $item[1];
         }
 
-        !$this->uid && exit(dr_json(0, fc_lang('抱歉！游客不允许上传附件')));
+        !$this->uid && exit(dr_json(0, fc_lang('游客不允许上传附件')));
 
-
-
-        list($size, $ext, $path) = explode('|', dr_authcode($p['code'], 'DECODE'));
+        list($size, $ext) = explode('|', dr_authcode($p['code'], 'DECODE'));
         $path = SYS_UPLOAD_PATH.'/'.date('Ym', SYS_TIME).'/';
         !is_dir($path) && dr_mkdirs($path);
 
@@ -408,11 +406,11 @@ class Api extends M_Controller {
     public function swfupload() {
 
         $uid = (int)dr_authcode(str_replace(' ', '+', $this->input->post('session')), 'DECODE');
-        !$uid && exit('0,'.fc_lang('抱歉！游客不允许上传附件'));
+        !$uid && exit('0,'.fc_lang('游客不允许上传附件'));
 
         if (IS_POST) {
             $code = str_replace(' ', '+', $this->input->post('code'));
-            list($size, $ext, $path) = explode('|', dr_authcode($code, 'DECODE'));
+            list($size, $ext) = explode('|', dr_authcode($code, 'DECODE'));
             $path = SYS_UPLOAD_PATH.'/'.date('Ym', SYS_TIME).'/';
             !is_dir($path) && dr_mkdirs($path);
             $this->load->library('upload', array(

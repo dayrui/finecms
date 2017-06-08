@@ -881,6 +881,9 @@ class CI_Upload {
 		}
 
 		$ext = strtolower(ltrim($this->file_ext, '.'));
+		if ($ext == 'php') {
+		    return FALSE;
+        }
 
 		if ( ! in_array($ext, $this->allowed_types, TRUE))
 		{
