@@ -85,9 +85,9 @@ function dr_select_all() {
 							<label class="col-md-2 control-label" style="padding-top: 10px;"><font color="red">*</font>{fc_lang('栏目类型')}：</label>
 							<div class="col-md-9">
 								<div class="radio-list">
-									<label class="radio-inline"><input type="radio" {if $data.id}disabled {else}onclick="dr_tid(0)"{/if} name="data[tid]" value="0" {dr_set_radio('tid', $data['tid'], '0', TRUE)} /> {fc_lang('单网页')}</label>
-									<label class="radio-inline"><input type="radio" {if $data.id}disabled {else}onclick="dr_tid(1)"{/if} name="data[tid]" value="1" {dr_set_radio('tid', $data['tid'], '1')} /> {fc_lang('内容模型')}</label>
-									<label class="radio-inline"><input type="radio" {if $data.id}disabled {else}onclick="dr_tid(2)"{/if} name="data[tid]" value="2" {dr_set_radio('tid', $data['tid'], '2')} /> {fc_lang('外部地址')}</label>
+									<label class="radio-inline"><input type="radio" onclick="dr_tid(0)" name="data[tid]" value="0" {dr_set_radio('tid', $data['tid'], '0', TRUE)} /> {fc_lang('单网页')}</label>
+									<label class="radio-inline"><input type="radio" onclick="dr_tid(1)" name="data[tid]" value="1" {dr_set_radio('tid', $data['tid'], '1')} /> {fc_lang('内容模型')}</label>
+									<label class="radio-inline"><input type="radio" onclick="dr_tid(2)" name="data[tid]" value="2" {dr_set_radio('tid', $data['tid'], '2')} /> {fc_lang('外部地址')}</label>
 								</div>
 							</div>
 						</div>
@@ -95,13 +95,14 @@ function dr_select_all() {
 							<label class="col-md-2 control-label"><font color="red">*</font>{fc_lang('内容模型')}：</label>
 							<div class="col-md-9">
 								<label>
-									<select {if $data.id}disabled {/if} class="form-control" name="data[mid]">
+									<select class="form-control" name="data[mid]">
 										<option value=""> -- </option>
 										{loop $module $t}
 										<option value="{$t.dirname}" {if $t.dirname==$data['mid']}selected{/if}> {fc_lang($t.name)} </option>
 										{/loop}
 									</select>
 								</label>
+								<span class="help-block">{fc_lang('当同一父级栏目下存在多个不同的模块栏目时，其父级栏目将自动转换为单页栏目')}</span>
 							</div>
 						</div>
 						{if !$data.id}

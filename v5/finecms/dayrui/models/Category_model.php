@@ -293,6 +293,41 @@ class Category_model extends CI_Model {
         return implode('/', $catdirs).'/';
     }
 
+    /**
+     * 格式化父级栏目模块mid
+     */
+    public function update_parent_mid($category, $catid) {
+
+        if (!isset($category[$catid])) {
+            return;
+        }
+
+        $ids = @explode(',',  $category[$catid]['childids']);
+        if (!$ids) {
+            return;
+        }
+
+        $mid = array();
+
+        foreach ($ids as $id) {
+            if ($id
+                && $category[$id]
+                && $category[$id]['tid'] == 1
+                && $category[$id]['mid']) {
+                $mid[] = $category[$id]['mid'];
+            }
+        }
+
+        $mid && $mid = array_unique($mid);
+
+        if (count($mid) > 1) {
+            $this->db->where('id', (int)$catid)->update($this->tablename, array(
+                'mid' => '',
+                'tid' => 0
+            ));
+        }
+    }
+
     public function repair() {
 
         $this->categorys = $categorys = array();
@@ -307,25 +342,31 @@ class Category_model extends CI_Model {
                 $child = is_numeric($childids) ? 0 : 1;
                 $pdirname = $this->get_pdirname($catid);
 
+                $this->categorys[$catid]['pids'] = $pids;
+                $this->categorys[$catid]['child'] = $child;
+                $this->categorys[$catid]['childids'] = $childids;
+                $this->categorys[$catid]['pdirname'] = $pdirname;
+
+                if ($categorys[$catid]['pdirname'] != $pdirname
+                    || $categorys[$catid]['pids'] != $pids
+                    || $categorys[$catid]['childids'] != $childids
+                    || $categorys[$catid]['child'] != $child) {
+                    $this->db->where('id', $catid)->update($this->tablename, array(
+                        'pids' => $pids,
+                        'child' => $child,
+                        'childids' => $childids,
+                        'pdirname' => $pdirname
+                    ));
+                }
+
                 if (define('SYS_CAT_MODULE') && SYS_CAT_MODULE) {
                     // 栏目模型唯一开启后
                     if ($cat['mid'] && $cat['pid']) {
                         list($pmid, $ids) = $this->get_parent_mid($this->categorys, $cat['pid']);
                         $pmid && $this->db->where_in('id', $ids)->update($this->tablename, array('mid' => $pmid));
                     }
-                }
-
-
-                if ($categorys[$catid]['pdirname'] != $pdirname
-                    || $categorys[$catid]['pids'] != $pids
-                    || $categorys[$catid]['childids'] != $childids
-                    || $categorys[$catid]['child'] != $child) {
-                    $this->db->where('id', $cat['id'])->update($this->tablename, array(
-                        'pids' => $pids,
-                        'child' => $child,
-                        'childids' => $childids,
-                        'pdirname' => $pdirname
-                    ));
+                } else {
+                    $child && $this->update_parent_mid($this->categorys, $catid);
                 }
             }
         }

@@ -85,7 +85,7 @@
 		</tr>
 		{/loop}
 		<tr class="mtable_bottom">
-			<th align="right"></th>
+			<th width="20" ><input name="dr_select" class="toggle md-check" id="dr_select" type="checkbox" onClick="dr_selected()" /></th>
 			<td colspan="11" align="left">
             <label><button type="button" class="btn red btn-sm" name="button" onClick="$('#action').val('del');return dr_confirm_set_all('{fc_lang('删除字段后无法恢复（系统字段请勿随意删除），您确定要这样操作吗？')}')"> <i class="fa fa-trash"></i> {fc_lang('删除')} </button></label>
 			<label><button type="button" class="btn green btn-sm" name="button" onclick="$('#action').val('order');return dr_confirm_set_all('{fc_lang('您确定要这样操作吗？')}')"> <i class="fa fa-edit"></i> {fc_lang('排序')}  </button></label>
