@@ -392,7 +392,7 @@ class M_Controller extends CI_Controller {
 
         $var = '';
         foreach ($param as $v) {
-            $var.= '[\''.$v.'\']';
+            $var.= '[\''.dr_safe_replace($v).'\']';
         }
 
         $return = NULL;
