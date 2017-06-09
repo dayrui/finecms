@@ -29,7 +29,7 @@ class Form_model extends CI_Model {
 
         if (!$data['name'] || !$data['table']) {
             return fc_lang('名称或者表名称不能为空');
-        } elseif (!preg_match('/^[a-z0-9]+$/i', $data['table'])) {
+        } elseif (!preg_match('/^[a-z]+[a-z0-9_]+$/i', $data['table'])) {
             return fc_lang('表名称格式不正确');
         } elseif ($this->db->where('table', $data['table'])->count_all_results($this->prefix)) {
             return fc_lang('表名称已经存在');

@@ -79,6 +79,7 @@ class Block extends M_Controller {
 					'option' => array(
 						'ext' => '*',
 						'size' => 99999,
+						'count' => 99999,
 					)
 				)
 			),
