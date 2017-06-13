@@ -258,6 +258,11 @@ return array(
                 'icon' => 'fa fa-cloud',
                 'menu' => array(
                     array(
+                        'name' => '程序升级',
+                        'uri' => 'upgrade/index',
+                        'icon' => 'fa fa-refresh',
+                    ),
+                    array(
                         'name' => '插件商城',
                         'uri' => 'home/cjonline',
                         'icon' => 'fa fa-plug',
@@ -268,9 +273,9 @@ return array(
                         'icon' => 'fa fa-code',
                     ),
                     array(
-                        'name' => '程序升级',
-                        'uri' => 'upgrade/index',
-                        'icon' => 'fa fa-refresh',
+                        'name' => '使用文档',
+                        'uri' => 'home/helponline',
+                        'icon' => 'fa fa-book',
                     ),
                 )
             ),
