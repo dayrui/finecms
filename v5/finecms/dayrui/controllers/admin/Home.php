@@ -280,4 +280,13 @@ class Home extends M_Controller {
         $this->template->display('online.html');
     }
 
+    function helponline() {
+        $this->template->assign(array(
+            'menu' => $this->get_menu_v3(array(
+                '帮助手册' => array('admin/home/helponline', 'book'),
+            )),
+        ));
+        $this->template->display('help.html');
+    }
+
 }
