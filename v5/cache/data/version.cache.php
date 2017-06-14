@@ -1,1 +1,0 @@
-s:10:"DR_VERSION";
