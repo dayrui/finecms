@@ -38,8 +38,8 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 $lang['db_invalid_connection_str'] = '无法使用所提供的设置连接到数据库服务器。';
-$lang['db_unable_to_connect'] = 'Unable to connect to your database server using the provided settings.';
-$lang['db_unable_to_select'] = 'Unable to select the specified database: %s';
+$lang['db_unable_to_connect'] = '连接不上数据库，检查config/database.php的参数';
+$lang['db_unable_to_select'] = '连接不上数据库【%s】，检查config/database.php的参数';
 $lang['db_unable_to_create'] = 'Unable to create the specified database: %s';
 $lang['db_invalid_query'] = 'The query you submitted is not valid.';
 $lang['db_must_set_table'] = 'You must set the database table to be used with your query.';
