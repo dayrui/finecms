@@ -68,19 +68,18 @@ class Home extends M_Controller {
             $top[$topid] = $t['top'];
             $topid ++;
         }
-        $this->template->assign(array(
-            'top' => $top,
-            'left' => $top_menu,
-        ));
 
         $mysite = array();
         foreach ($this->site_info as $sid => $t) {
             $mysite[$sid] = $t['SITE_NAME'];
         }
 
+        ob_start();
         ob_clean();
         $this->template->assign(array(
             'mysite' => $mysite,
+            'top' => $top,
+            'left' => $top_menu,
         ));
 
         $this->template->display('index.html');
@@ -179,6 +178,12 @@ class Home extends M_Controller {
      * 后台首页
      */
     public function main() {
+
+        if (is_file(WEBPATH.'cache/install.new')) {
+            @unlink(WEBPATH.'cache/install.new');
+            $this->cache();
+            return;
+        }
 
         $server = @explode(' ', strtolower($_SERVER['SERVER_SOFTWARE']));
         if (isset($server[0]) && $server[0]) {

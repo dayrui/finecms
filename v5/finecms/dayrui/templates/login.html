@@ -48,13 +48,7 @@
 
 		var sys_theme = "{THEME_PATH}admin/";
 		jQuery(document).ready(function() {
-			$.backstretch([
-						{implode(',', $bg)}
-					], {
-						fade: 1000,
-						duration: 8000
-					}
-			);
+
 			top.$('.page-loading').remove();
 			{if $username}
 			$("#password").focus();

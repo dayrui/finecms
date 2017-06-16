@@ -184,6 +184,7 @@ class Image extends M_Controller {
         $type = $vals[2];
 
         // 输出图片
+        ob_start();
         ob_clean();
         header('Content-Disposition: filename='.$filename.';');
         header('Content-Type: '.$mime);

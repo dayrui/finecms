@@ -268,6 +268,9 @@ class Category extends M_Controller {
             $data['pid'] = $data['pid'] == $id ? $_data['pid'] : $data['pid'];
             $data['rule'] = $this->input->post('rule');
             $result	= $this->category_model->edit($id, $data, $_data, $field);
+            if ($result) {
+                $this->admin_msg($result);
+            }
             $this->category_model->syn($data, $_data);
             $data['id']	= $id;
             $data['permission'] = $data['rule'];

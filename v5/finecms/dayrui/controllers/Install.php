@@ -128,7 +128,7 @@ class Install extends CI_Controller {
                     $config.= "	'dbdriver'	=> '".($mysqli ? 'mysqli' : 'mysql')."',".PHP_EOL;
                     $config.= "	'dbprefix'	=> '{$data['dbprefix']}',".PHP_EOL;
                     $config.= "	'pconnect'	=> FALSE,".PHP_EOL;
-                    $config.= "	'db_debug'	=> FALSE,".PHP_EOL;
+                    $config.= "	'db_debug'	=> true,".PHP_EOL;
                     $config.= "	'cache_on'	=> FALSE,".PHP_EOL;
                     $config.= "	'cachedir'	=> 'cache/sql/',".PHP_EOL;
                     $config.= "	'char_set'	=> 'utf8',".PHP_EOL;
@@ -144,8 +144,10 @@ class Install extends CI_Controller {
                     if (!file_put_contents(WEBPATH.'config/database.php', $config)) {
                         exit(dr_json(0, '数据库配置文件保存失败，请检查文件config/database.php权限！'));
                     }
+
                     // 加载数据库
                     $this->load->database();
+                    $this->db->db_debug = false;
 
 
                     // 导入表结构
