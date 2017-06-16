@@ -164,8 +164,10 @@ class Category_model extends CI_Model {
 
     public function edit($id, $data, $_data, $field = array()) {
 
-        if (!$data || !$data['dirname']) {
-            return fc_lang('数据被删除或者查询不存在');
+        if (!$data) {
+            return fc_lang('栏目数据不存在');
+        } elseif (!$data['dirname']) {
+            return fc_lang('栏目目录不存在');
         } elseif ($this->dirname_exitsts($data['dirname'], $id)) {
             return fc_lang('目录已经存在了');
         }
@@ -203,7 +205,7 @@ class Category_model extends CI_Model {
         $this->repair();
 
 
-        return fc_lang('操作成功');
+        return '';
     }
 
     public function syn($data, $_data) {

@@ -25,19 +25,22 @@
 				<div id="carousel-example-generic" style="margin-bottom: 10px" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
 
-					{php $tu = @explode(PHP_EOL, dr_block(2));}
 					<ol class="carousel-indicators">
-						{loop $tu $i $t}
-						<li data-target="#carousel-example-generic" data-slide-to="{$i}" class="{if $i==0}active{/if}"></li>
-						{/loop}
+						<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+						<li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+						<li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
 					</ol>
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
-						{loop $tu $i $t}
-						<div class="item {if $i==0}active{/if}">
-							<img src="{$t}" />
-						</div>
-						{/loop}
+                        <div class="item active">
+                            <img src="http://www.dayrui.com/static/assets/banner/finecms-1.jpg" />
+                        </div>
+                        <div class="item ">
+                            <img src="http://www.dayrui.com/static/assets/banner/finecms-2.jpg" />
+                        </div>
+                        <div class="item ">
+                            <img src="http://www.dayrui.com/static/assets/banner/finecms-3.jpg" />
+                        </div>
 					</div>
 
 				</div>

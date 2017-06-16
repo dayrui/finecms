@@ -1,7 +1,6 @@
 
 INSERT INTO `{dbprefix}1_block` VALUES(1, '首页文本公告', 'FineCMS公益版v5.0正式上线了，全新内容管理设计，灵活，高负载|#009688\nFineCMS公益版永久免费开源，不计较版权，开源QQ群：8615168|red');
-INSERT INTO `{dbprefix}1_block` VALUES(2, '首页幻灯图片', 'http://www.dayrui.com/static/assets/banner/finecms-1.jpg\nhttp://www.dayrui.com/static/assets/banner/finecms-2.jpg\nhttp://www.dayrui.com/static/assets/banner/finecms-3.jpg');
-INSERT INTO `{dbprefix}1_block` VALUES(3, '友情链接', 'http://www.finecms.net|公益版论坛\nhttp://www.dayrui.com|天睿程序设计');
+INSERT INTO `{dbprefix}1_block` VALUES(3, '友情链接', 'http://www.finecms.net|公益版论坛\n\thttp://www.dayrui.com|天睿程序设计');
 
 
 INSERT INTO `{dbprefix}1_category` VALUES(1, 1, 0, 'news', '0', '业界', '', 'y', 'yejie', '', 1, '1,7,8,9', 0, '', 1, '', '', '{"edit":"0","linkurl":"","urlrule":5,"seo":{"show_title":"[\\u7b2c{page}\\u9875{join}]{title}{join}{catname}{join}{SITE_NAME}","list_title":"[\\u7b2c{page}\\u9875{join}]{name}{join}{SITE_NAME}","list_keywords":"\\u4e1a\\u754c\\u65b0\\u95fb","list_description":"\\u4e1a\\u754c\\u65b0\\u95fb\\u63cf\\u8ff0"},"template":{"pagesize":"20","show":"show.html","category":"category.html","list":"list.html","search":"search.html","page":"page.html"},"admin":[],"member":[],"html":0}', 0);
