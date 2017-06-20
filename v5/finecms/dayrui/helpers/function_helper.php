@@ -1478,9 +1478,7 @@ function dr_ajax_html($id, $tpl, $params = array()) {
 // 获取当前模板目录
 function dr_tpl_path($file) {
     
-    $path = IS_MEMBER ? TPLPATH.(IS_MOBILE ? 'mobile' : 'pc').'/member/'.MEMBER_TEMPLATE.'/' : TPLPATH.(IS_MOBILE ? 'mobile' : 'pc').'/web/'.SITE_TEMPLATE.'/';
-    APP_DIR && APP_DIR != 'member' ? $path.= APP_DIR.'/' : $path.= 'common/';
-    
+    $path = TPLPATH.(IS_MOBILE ? 'mobile/' : 'pc/'). (IS_MEMBER ? SITE_TEMPLATE.'/member/' : SITE_TEMPLATE.'/common/');
     if (is_file($path.$file)) {
         return $path.$file;
     }
