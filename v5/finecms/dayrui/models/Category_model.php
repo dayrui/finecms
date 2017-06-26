@@ -184,8 +184,11 @@ class Category_model extends CI_Model {
         }
         $data['setting']['html'] = intval($data['setting']['html']);
         $data['setting']['getchild'] = intval($data['setting']['getchild']);
+        $mid = $data['tid'] == 1 ? $data['mid'] : '';
         $update = array(
             'pid' => (int)$data['pid'],
+            'tid' => (int)$data['tid'],
+            'mid' => $mid,
             'name' => $data['name'],
             'show' => $data['show'],
             'domain' => $data['domain'] ? $data['domain'] : '',
