@@ -634,18 +634,9 @@ class Api extends M_Controller {
                 strpos($kw, $t) !== false && $return[] = $t;
             }
         }
-        $data = @file_get_contents('http://keyword.discuz.com/related_kw.html?ics=utf-8&ocs=utf-8&title='.rawurlencode($kw).'&content='.rawurlencode($kw));
 
-        if ($data) {
-            $xml = xml_parser_create();
-            xml_parser_set_option($xml, XML_OPTION_CASE_FOLDING, 0);
-            xml_parser_set_option($xml, XML_OPTION_SKIP_WHITE, 1);
-            xml_parse_into_struct($xml, $data, $values, $index);
-            xml_parser_free($xml);
-            foreach ($values as $v) {
-                $kw = trim($v['value']);
-                strlen($kw) > 5 && ($v['tag'] == 'kw' || $v['tag'] == 'ekw') && $return[] = $kw;
-            }
+        if (!$return) {
+            exit;
         }
 
         echo @implode(',', $return);exit;
