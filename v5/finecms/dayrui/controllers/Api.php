@@ -131,122 +131,10 @@ class Api extends M_Controller {
             }
             if (!$data) {
 
-                if ($param == 'login') {
-                    // 登录认证
-                    $code = $this->member_model->login(
-                        $this->input->get('username'),
-                        $this->input->get('password'),
-                        0, 1);
-                    if (is_array($code)) {
-                        $data = array(
-                            'msg' => 'ok',
-                            'code' => 1,
-                            'return' => $this->member_model->get_member($code['uid'])
-                        );
-                    } elseif ($code == -1) {
-                        $data = array('msg' => fc_lang('会员不存在'), 'code' => 0);
-                    } elseif ($code == -2) {
-                        $data = array('msg' => fc_lang('密码不正确'), 'code' => 0);
-                    } elseif ($code == -3) {
-                        $data = array('msg' => fc_lang('Ucenter注册失败'), 'code' => 0);
-                    } elseif ($code == -4) {
-                        $data = array('msg' => fc_lang('Ucenter：会员名称不合法'), 'code' => 0);
-                    }
-                } elseif ($param == 'update_avatar') {
-                    // 更新头像
-                    $uid = (int)$_REQUEST['uid'];
-                    $file = $_REQUEST['file'];
-                    //
-                    // 创建图片存储文件夹
-                    $dir = SYS_UPLOAD_PATH.'/member/'.$uid.'/';
-                    @dr_dir_delete($dir);
-                    if (!is_dir($dir)) {
-                        dr_mkdirs($dir);
-                    }
-                    $file = str_replace(' ', '+', $file);
-                    if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $file, $result)){
-                        $new_file = $dir.'0x0.'.$result[2];
-                        if (!@file_put_contents($new_file, base64_decode(str_replace($result[1], '', $file)))) {
-                            $data = array(
-                                'msg' => '目录权限不足或磁盘已满',
-                                'code' => 0
-                            );
-                        } else {
-                            $this->load->library('image_lib');
-                            $config['create_thumb'] = TRUE;
-                            $config['thumb_marker'] = '';
-                            $config['maintain_ratio'] = FALSE;
-                            $config['source_image'] = $new_file;
-                            foreach (array(30, 45, 90, 180) as $a) {
-                                $config['width'] = $config['height'] = $a;
-                                $config['new_image'] = $dir.$a.'x'.$a.'.'.$result[2];
-                                $this->image_lib->initialize($config);
-                                if (!$this->image_lib->resize()) {
-                                    $data = array(
-                                        'msg' => $this->image_lib->display_errors(),
-                                        'code' => 0
-                                    );
-                                    break;
-                                }
-                            }
-                            list($width, $height, $type, $attr) = getimagesize($dir.'45x45.'.$result[2]);
-                            if (!$type) {
-                                $data = array(
-                                    'msg' => '错误的文件格式，请传输图片的字符',
-                                    'code' => 0
-                                );
-                            }
-                        }
-                    } else {
-                        $data = array(
-                            'msg' => '图片字符串不规范，请使用base64格式',
-                            'code' => 0
-                        );
-                    }
-
-                    // 更新头像
-                    if (!isset($data['code'])){
-                        $data = array(
-                            'code' => 1,
-                            'msg' => '更新成功'
-                        );
-                        $this->db->where('uid', $uid)->update('member', array('avatar' => $uid));
-                    }
-                } elseif ($param == 'function') {
-                    // 执行函数
-                    $name = $this->input->get('name', true);
-                    if (strpos($name, 'dr_') !== 0) {
-                        $data = array('msg' => '函数名必须以dr_开头的自定义函数', 'code' => 0);
-                    } elseif (function_exists($name)) {
-                        $_param = array();
-                        $_getall = $this->input->get(null, true);
-                        if ($_getall) {
-                            for ($i=1; $i<=10; $i++) {
-                                if (isset($_getall['p'.$i])) {
-                                    $_param[] = $_getall['p'.$i];
-                                } else {
-                                    break;
-                                }
-                            }
-                        }
-                        $data = array('msg' => '', 'code' => 1, 'result' => call_user_func_array($name, $_param));
-                    } else {
-                        $data = array('msg' => '函数 （dr_'.$name.'）不存在', 'code' => 0);
-                    }
-                } elseif ($param == 'get_file') {
-                    // 获取文件地址
-                    $info = get_attachment((int)$this->input->get('id'));
-                    if (!$info) {
-                        $data = array('msg' => fc_lang('附件不存在或者已经被删除'), 'code' => 0, 'url' => '');
-                    } else {
-                        $data = array('msg' => '', 'code' => 1, 'url' => dr_get_file($info['attachment']));
-                    }
-                } else {
-                    // list数据查询
-                    $data = $this->template->list_tag($param);
-                    $data['code'] = $data['error'] ? 0 : 1;
-                    unset($data['sql'], $data['pages']);
-                }
+                // list数据查询
+                $data = $this->template->list_tag($param);
+                $data['code'] = $data['error'] ? 0 : 1;
+                unset($data['sql'], $data['pages']);
 
                 // 缓存数据
                 $cache && $this->set_cache_data($cache, $data, $param['cache']);
@@ -263,6 +151,7 @@ class Api extends M_Controller {
                 $data = $function($data);
             }
         }
+
 		// 页面输出
 		if ($format == 'php') {
 			print_r($data);
