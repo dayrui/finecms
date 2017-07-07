@@ -255,16 +255,21 @@ class Category_model extends CI_Model {
         return $pids;
     }
 
-    private function get_childids($catid) {
+    private function get_childids($catid, $n = 1) {
 
         $childids = $catid;
+        if ($n > 5
+            || !is_array($this->categorys)
+            || !isset($this->categorys[$catid])) {
+            return $childids;
+        }
 
         if (is_array($this->categorys)) {
             foreach ($this->categorys as $id => $cat) {
                 if ($cat['pid']
                     && $id != $catid
                     && $cat['pid'] == $catid) {
-                    $childids.= ','.$this->get_childids($id);
+                    $childids.= ','.$this->get_childids($id, ++$n);
                 }
             }
         }

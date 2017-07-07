@@ -274,8 +274,12 @@ class Linkage_model extends CI_Model {
 	 * @param	$catid	栏目ID
 	 * @return	string
 	 */
-	private function get_childids($catid) {
+	private function get_childids($catid, $n = 1) {
 		$childids = $catid;
+        if ($n > 10 || !is_array($this->categorys)
+            || !isset($this->categorys[$catid])) {
+            return $childids;
+        }
 		if (is_array($this->categorys)) {
 			foreach ($this->categorys as $id => $cat) {
 				// 避免造成死循环
@@ -283,7 +287,7 @@ class Linkage_model extends CI_Model {
 				&& $id != $catid
 				&& $cat['pid'] == $catid
 				&& $this->categorys[$catid]['pid'] != $id
-				&& $childids.= ','.$this->get_childids($id);
+				&& $childids.= ','.$this->get_childids($id, ++$n);
 			}
 		}
 		return $childids;
