@@ -369,7 +369,7 @@ class Category_model extends CI_Model {
                     ));
                 }
 
-                if (define('SYS_CAT_MODULE') && SYS_CAT_MODULE) {
+                if (defined('SYS_CAT_MODULE') && SYS_CAT_MODULE) {
                     // 栏目模型唯一开启后
                     if ($cat['mid'] && $cat['pid']) {
                         list($pmid, $ids) = $this->get_parent_mid($this->categorys, $cat['pid']);
