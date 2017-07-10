@@ -43,12 +43,11 @@ class F_Redirect extends A_Field {
 	public function insert_value($field) {
 	
 		$value = $this->ci->post[$field['fieldname']];
-		
-		if ($value) {
-			$value = stripos($value, 'http://') !== 0 ? 'http://'.$value : $value;
-		}
-		
-		$this->ci->data[$field['ismain']][$field['fieldname']] = $value;
+
+        $value && $value = stripos($value, 'https://') === 0 || stripos($value, 'http://') === 0 ? $value : 'http://'.$value;
+
+
+        $this->ci->data[$field['ismain']][$field['fieldname']] = $value;
 	}
 	
 	/**
