@@ -460,7 +460,12 @@ class CI_Upload {
 		$this->file_ext	 = $this->get_extension($this->file_name);
 		$this->client_name = $this->file_name;
 
-
+ // Is the file type allowed to be uploaded?
+        if ( ! $this->is_allowed_filetype())
+        {
+            $this->set_error('文件格式不正确', 'debug');
+            return FALSE;
+        }
 
 		// if we're overriding, let's now make sure the new name and type is allowed
 		if ($this->_file_name_override !== '')
@@ -900,13 +905,14 @@ class CI_Upload {
 		{
 			return TRUE;
 		}
-        return TRUE;
+        
+		/* 暂时注释
 		if (isset($this->_mimes[$ext]))
 		{
 			return is_array($this->_mimes[$ext])
 				? in_array($this->file_type, $this->_mimes[$ext], TRUE)
 				: ($this->_mimes[$ext] === $this->file_type);
-		}
+		}*/
 
 		return FALSE;
 	}
