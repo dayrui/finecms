@@ -905,7 +905,7 @@ class CI_Upload {
 		{
 			return TRUE;
 		}
-        
+
 		/* 暂时注释
 		if (isset($this->_mimes[$ext]))
 		{
@@ -914,7 +914,7 @@ class CI_Upload {
 				: ($this->_mimes[$ext] === $this->file_type);
 		}*/
 
-		return FALSE;
+		return TRUE;
 	}
 
 	// --------------------------------------------------------------------
