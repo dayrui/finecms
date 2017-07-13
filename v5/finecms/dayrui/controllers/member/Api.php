@@ -387,9 +387,7 @@ class Api extends M_Controller {
             $this->attachment_model->siteid = $p['siteid'] ? $p['siteid'] : SITE_ID;
             $result = $this->attachment_model->upload($this->uid, $info);
             if (is_array($result)) {
-                list($id, $file, $_ext) = $result;
-                //$icon = is_file(WEBPATH.'statics/admin/images/ext/'.$_ext.'.gif') ? THEME_PATH.'admin/images/ext/'.$_ext.'.gif' : THEME_PATH.'admin/images/ext/blank.gif';
-                //echo json_encode(array('status'=>1, 'icon'=> $icon, 'size' => dr_format_file_size($info['file_size'] * 1024), 'id'=>$id));exit;
+                list($id) = $result;
                 echo json_encode(array('status'=>1, 'id'=>$id, 'name' => dr_strcut($filename, 10).'.'.$fileext));exit;
             } else {
                 @unlink($info['full_path']);
