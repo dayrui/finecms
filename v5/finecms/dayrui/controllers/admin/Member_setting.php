@@ -17,7 +17,7 @@ class Member_setting extends M_Controller {
 		$result = 0;
 		
 		if (IS_POST) {
-			$post = $this->input->post('data');
+			$post = $this->input->post('data', true);
 			$page = (int)$this->input->post('page');
 			$this->member_model->member($post);
 			$data = $post;

@@ -24,8 +24,8 @@ class Login extends M_Controller {
 			if (SITE_ADMIN_CODE && !$this->check_captcha('code')) {
                 $error = fc_lang('验证码不正确');
             } else {
-				$u = $this->input->post('username');
-				$p = $this->input->post('password');
+				$u = $this->input->post('username', true);
+				$p = $this->input->post('password', true);
                 $uid = $this->member_model->admin_login($u, $p);
                 if ($uid > 0) {
                     $url = $this->input->get('backurl') ? urldecode($this->input->get('backurl')) : dr_url('home');

@@ -50,7 +50,7 @@ class Site extends M_Controller {
 			if (!$ids) {
                 exit(dr_json(0, fc_lang('您还没有选择呢')));
             }
-			$_data = $this->input->post('data');
+			$_data = $this->input->post('data', true);
 			foreach ($ids as $id) {
                 if ($this->db->where('id<>', (int)$id)->where('domain', $_data[$id]['domain'])->count_all_results('site')) {
                     exit(dr_json(0, fc_lang('域名【%s】已经被使用了', $_data[$id]['domain'])));
@@ -130,8 +130,8 @@ class Site extends M_Controller {
         $result	= '';
 
 		if (IS_POST) {
-			$cfg = $this->input->post('data');
-			$cfg['SITE_DOMAIN'] = $this->input->post('domain');
+			$cfg = $this->input->post('data', true);
+			$cfg['SITE_DOMAIN'] = $this->input->post('domain', true);
             // 查询非当前站点绑定的域名
             $as = array();
             $all = $this->db->where('id<>', $id)->get('site')->result_array();
