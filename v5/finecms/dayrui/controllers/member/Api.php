@@ -372,9 +372,9 @@ class Api extends M_Controller {
 
         $fileext = strtolower(trim(substr(strrchr($furl, '.'), 1, 10))); //扩展名
         $exts = (array)explode(',', $ext);
-        $exts[] = 'php';
         !in_array($fileext, $exts) && exit(dr_json(0, '远程文件扩展名（'.$fileext.'）不允许'));
-        
+        $fileext == 'php' && exit(dr_json(0, '远程文件扩展名（'.$fileext.'）不允许'));
+
         $filename = substr(md5(time()), 0, 7).rand(100, 999);
         if (@file_put_contents($path.$filename.'.'.$fileext, $file)) {
             $info = array(

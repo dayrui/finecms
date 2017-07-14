@@ -28,6 +28,7 @@ class Dconfig {
     public function file($file) {
         $this->file = $file;
         $this->header = '<?php'.PHP_EOL.PHP_EOL.
+            'if (!defined(\'BASEPATH\')) exit(\'No direct script access allowed\');'.PHP_EOL.PHP_EOL.
             '/**'.PHP_EOL.
             ' * FineCMS'.PHP_EOL.
             ' */'.PHP_EOL.PHP_EOL

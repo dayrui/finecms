@@ -723,7 +723,7 @@ class Member_model extends CI_Model {
 
         // 更新UCSSO配置
         if ($cache['setting']['ucsso']) {
-            file_put_contents(WEBPATH.'api/ucsso/config.php', stripslashes($cache['setting']['ucssocfg']));
+            file_put_contents(WEBPATH.'api/ucsso/config.php', str_replace(array('<?php', '<?'),'<?php if (!defined(\'BASEPATH\')) exit(\'No direct script access allowed\');'.PHP_EOL, stripslashes($cache['setting']['ucssocfg'])));
         }
 
         $this->ci->clear_cache('member');
