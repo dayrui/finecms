@@ -56,27 +56,7 @@ class Api extends M_Controller {
      */
 	public function ajax_upload() {
 		
-		$ext = $this->input->get('ext');
-		$file = $this->input->get('file');
-		$path = $this->input->get('path');
-		$name = $this->input->get('name');
-        
-        !is_dir(FCPATH.$path) && exit(dr_json(0, '目录（'.$path.'）不存在'));
-        
-		$this->load->library('upload', array(
-			'max_size' => 1024 * 1024,
-			'overwrite' => TRUE,
-			'file_name' => $file,
-			'upload_path' => FCPATH.$path,
-			'allowed_types' => $ext ? $ext : '*',
-			'file_ext_tolower' => TRUE,
-		));
-		if ($this->upload->do_upload($name)) {
-			$info = $this->upload->data();
-			exit(dr_json(1, $info['orig_name']));
-		} else {
-			exit(dr_json(0, $this->upload->display_errors('', '')));
-		}
+
 	}
 	
 	

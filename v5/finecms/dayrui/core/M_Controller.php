@@ -695,8 +695,7 @@ class M_Controller extends CI_Controller {
      */
     protected function is_admin_login() {
 
-        if (IS_ADMIN
-            && ($this->router->class == 'login' || $this->router->class == 'api')) {
+        if (IS_ADMIN && ($this->router->class == 'login' || $this->router->method == 'login')) {
             return FALSE;
         }
 

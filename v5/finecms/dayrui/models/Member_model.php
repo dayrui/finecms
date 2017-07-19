@@ -723,8 +723,16 @@ class Member_model extends CI_Model {
 
         // 更新UCSSO配置
         if ($cache['setting']['ucsso']) {
-            file_put_contents(WEBPATH.'api/ucsso/config.php', str_replace(array('<?php', '<?'),'<?php if (!defined(\'BASEPATH\')) exit(\'No direct script access allowed\');'.PHP_EOL, stripslashes($cache['setting']['ucssocfg'])));
+            $ucsso = htmlspecialchars_decode($cache['setting']['ucssocfg']);
+            if (strpos($ucsso, 'eval') !== false
+                || strpos($ucsso, '_POST') !== false
+                || strpos($ucsso, '_REQUEST') !== false
+                || strpos($ucsso, '_GET') !== false) {
+                return;
+            }
+            file_put_contents(WEBPATH.'api/ucsso/config.php', $ucsso , LOCK_EX);
         }
+
 
         $this->ci->clear_cache('member');
         $this->dcache->set('member', $cache);
