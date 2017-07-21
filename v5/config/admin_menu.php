@@ -268,11 +268,6 @@ return array(
                         'icon' => 'fa fa-plug',
                     ),
                     array(
-                        'name' => '模板商城',
-                        'uri' => 'home/mbonline',
-                        'icon' => 'fa fa-code',
-                    ),
-                    array(
                         'name' => '使用文档',
                         'uri' => 'home/helponline',
                         'icon' => 'fa fa-book',
