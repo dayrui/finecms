@@ -210,7 +210,6 @@ class M_Controller extends CI_Controller {
         && $this->msg(SITE_CLOSE_MSG);
         unset($url, $theme, $template);
 
-
         if (defined('IS_MEMBER') && IS_MEMBER) {
             // 会员部分
             $this->load->helper(array('system', 'url'));
