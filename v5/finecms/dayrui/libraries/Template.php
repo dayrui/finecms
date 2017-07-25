@@ -1575,13 +1575,14 @@ class Template {
 
         $string = '';
         foreach ($array as $var) {
+            $var = dr_safe_replace($var);
             $string.= '[';
             if (strpos($var, '$') === 0) {
                 $string.= preg_replace('/\[(.+)\]/U', '[\'\\1\']', $var);
             } elseif (preg_match('/[A-Z_]+/', $var)) {
                 $string.= ''.$var.'';
             } else {
-                $string.= '\''.dr_safe_replace($var).'\'';
+                $string.= '\''$var.'\'';
             }
             $string.= ']';
         }
