@@ -106,13 +106,12 @@ class Api extends M_Controller {
 		header('Content-Type: text/html; charset=utf-8');
 		echo '服务器支持伪静态';
 	}
-	
 
-	
 	/**
-	 * 自定义数据调用（新版本）
+	 * 自定义数据调用
 	 */
 	public function data2() {
+	    // 扥待新方案
 		exit;
 	}
 

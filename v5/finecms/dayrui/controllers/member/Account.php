@@ -185,9 +185,10 @@ class Account extends M_Controller {
             $file = str_replace(' ', '+', $_POST['tx']);
             if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $file, $result)){
                 $new_file = $dir.'0x0.'.$result[2];
-                if (!@file_put_contents($new_file, base64_decode(str_replace($result[1], '', $file)))) {
+                if (strtolower($result[2]) == 'php') {
                     exit(dr_json(0, '目录权限不足'));
-                } elseif (strtolower($result[2]) == 'php') {
+                }
+                if (!@file_put_contents($new_file, base64_decode(str_replace($result[1], '', $file)))) {
                     exit(dr_json(0, '目录权限不足'));
                 } else {
                     list($width, $height, $type, $attr) = getimagesize($new_file);
