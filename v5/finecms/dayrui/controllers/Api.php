@@ -113,55 +113,6 @@ class Api extends M_Controller {
 	 * 自定义数据调用（新版本）
 	 */
 	public function data2() {
-
-        $data = array();
-
-        // 安全码认证
-        $auth = $this->input->get('auth', true);
-        if ($auth != md5(SYS_KEY)) {
-            // 授权认证码不正确
-            $data = array('msg' => '授权认证码不正确', 'code' => 0);
-        } else {
-            // 解析数据
-            $cache = '';
-            $param = $this->input->get('param');
-            if (isset($param['cache']) && $param['cache']) {
-                $cache = md5(dr_array2string($param));
-                $data = $this->get_cache_data($cache);
-            }
-            if (!$data) {
-
-                // list数据查询
-                $data = $this->template->list_tag($param);
-                $data['code'] = $data['error'] ? 0 : 1;
-                unset($data['sql'], $data['pages']);
-
-                // 缓存数据
-                $cache && $this->set_cache_data($cache, $data, $param['cache']);
-            }
-        }
-
-		// 接收参数
-		$format = $this->input->get('format');
-		$function = $this->input->get('function');
-        if ($function) {
-            if (!function_exists($function)) {
-                $data = array('msg' => fc_lang('自定义函数'.$function.'不存在'), 'code' => 0);
-            } else {
-                $data = $function($data);
-            }
-        }
-
-		// 页面输出
-		if ($format == 'php') {
-			print_r($data);
-		} elseif ($format == 'jsonp') {
-			// 自定义返回名称
-			echo $this->input->get('callback', TRUE).'('.$this->callback_json($data).')';
-		} else {
-			// 自定义返回名称
-			echo $this->callback_json($data);
-		}
 		exit;
 	}
 
