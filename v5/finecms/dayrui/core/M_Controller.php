@@ -1605,6 +1605,8 @@ class M_Controller extends CI_Controller {
         $member = $this->db->select('password')->where('uid', $uid)->get('member')->row_array();
         if (!$member) {
             exit('check error');
+        } elseif ($member['salt'] != $salt) {
+            exit('error');
         }
 
         header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');

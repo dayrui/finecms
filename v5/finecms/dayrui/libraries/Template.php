@@ -1581,7 +1581,7 @@ class Template {
             } elseif (preg_match('/[A-Z_]+/', $var)) {
                 $string.= ''.$var.'';
             } else {
-                $string.= '\''.$var.'\'';
+                $string.= '\''.dr_safe_replace($var).'\'';
             }
             $string.= ']';
         }
