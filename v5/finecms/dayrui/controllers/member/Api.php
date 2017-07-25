@@ -53,6 +53,7 @@ class Api extends M_Controller {
             $catid && $db->where_in('catid', $category[$catid]['catids']);
             if (isset($data['keyword']) && $data['keyword']
                 && $data['field'] && isset($field[$data['field']])) {
+                $data['keyword'] = dr_safe_replace(urldecode($data['keyword']));
                 if ($data['field'] == 'id') {
                     // id搜索
                     $id = array();
