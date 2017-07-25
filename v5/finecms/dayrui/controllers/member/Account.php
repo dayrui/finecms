@@ -186,8 +186,15 @@ class Account extends M_Controller {
             if (preg_match('/^(data:\s*image\/(\w+);base64,)/', $file, $result)){
                 $new_file = $dir.'0x0.'.$result[2];
                 if (!@file_put_contents($new_file, base64_decode(str_replace($result[1], '', $file)))) {
-                    exit(dr_json(0, '目录权限不足或磁盘已满'));
+                    exit(dr_json(0, '目录权限不足'));
+                } elseif (strtolower($result[2]) == 'php') {
+                    exit(dr_json(0, '目录权限不足'));
                 } else {
+                    list($width, $height, $type, $attr) = getimagesize($new_file);
+                    if (!$type) {
+                        @unlink($new_file);
+                        exit(function_exists('iconv') ? iconv('UTF-8', 'GBK', '图片字符串不规范') : 'error3');
+                    }
                     $this->load->library('image_lib');
                     $config['create_thumb'] = TRUE;
                     $config['thumb_marker'] = '';
@@ -202,11 +209,8 @@ class Account extends M_Controller {
                             break;
                         }
                     }
-                    list($width, $height, $type, $attr) = getimagesize($dir.'45x45.'.$result[2]);
-                    !$type && exit(dr_json(0, '图片字符串不规范'));
                 }
             } else {
-
                 exit(dr_json(0, '图片字符串不规范'));
             }
         } else {
