@@ -1602,7 +1602,7 @@ class M_Controller extends CI_Controller {
             exit('data is null');
         }
 
-        $member = $this->db->select('password')->where('uid', $uid)->get('member')->row_array();
+        $member = $this->db->select('password,salt')->where('uid', $uid)->get('member')->row_array();
         if (!$member) {
             exit('check error');
         } elseif ($member['salt'] != $salt) {
