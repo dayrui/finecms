@@ -61,7 +61,7 @@ class Show extends M_Controller {
 
             // 处理关键字标签
             $data['tag'] = $data['keywords'];
-            $data['keyword_list'] = dr_tag_list($data['keywords'], 1);
+            $data['keyword_list'] = dr_tag_list($data['keywords'], 0);
 
             // 上一篇文章
             $this->db->where('catid', $data['catid'])->where('status', 9);
