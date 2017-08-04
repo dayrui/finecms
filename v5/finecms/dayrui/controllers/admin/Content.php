@@ -81,6 +81,18 @@ class Content extends M_Controller {
                     )
                 )
             ),
+            'hits' => array(
+                'name' => fc_lang('阅读量'),
+                'ismain' => 1,
+                'fieldtype' => 'Text',
+                'fieldname' => 'hits',
+                'setting' => array(
+                    'option' => array(
+                        'width' => 200,
+                        'value' => 0,
+                    )
+                )
+            ),
             'status' => array(
                 'name' => fc_lang('状态'),
                 'ismain' => 1,
