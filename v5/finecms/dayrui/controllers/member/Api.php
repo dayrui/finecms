@@ -225,19 +225,19 @@ class Api extends M_Controller {
      */
     public function baidumap() {
 
-        $list = $this->input->get('city') ? explode(',', urldecode($this->input->get('city'))) : NULL;
+        $list = $this->input->get('city', true) ? explode(',', urldecode($this->input->get('city', tru))) : NULL;
         $city = isset($list[0]) ? $list[0] : '';
-        $value = $this->input->get('value');
+        $value = $this->input->get('value', tru);
         $value = strlen($value) > 10 ? $value : '';
 
         $this->template->assign(array(
             'city' => $city,
             'value' => $value,
             'list' => $list,
-            'name' => $this->input->get('name'),
+            'name' => $this->input->get('name', tru),
             'level' => (int)$this->input->get('level'),
-            'width' => $this->input->get('width'),
-            'height' => $this->input->get('height') - 30,
+            'width' => $this->input->get('width', tru),
+            'height' => $this->input->get('height', tru) - 30,
         ));
         $this->template->display('baidumap.html', 'admin');
 
