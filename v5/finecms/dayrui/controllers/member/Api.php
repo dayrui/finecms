@@ -225,9 +225,9 @@ class Api extends M_Controller {
      */
     public function baidumap() {
 
-        $list = $this->input->get('city', true) ? explode(',', urldecode($this->input->get('city', tru))) : NULL;
+        $list = $this->input->get('city', true) ? explode(',', urldecode($this->input->get('city', true))) : NULL;
         $city = isset($list[0]) ? $list[0] : '';
-        $value = $this->input->get('value', tru);
+        $value = $this->input->get('value', true);
         $value = strlen($value) > 10 ? $value : '';
 
         $this->template->assign(array(
