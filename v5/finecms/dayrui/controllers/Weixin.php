@@ -42,7 +42,7 @@ class Weixin extends M_Controller {
 
         if ($tmp_str == $signature) {
             // 判读是不是只是验证
-            $echostr = $this->input->get('echostr');
+            $echostr = $this->input->get('echostr', true);
             if (!empty($echostr)) {
                 echo $echostr;exit;
             } else {
