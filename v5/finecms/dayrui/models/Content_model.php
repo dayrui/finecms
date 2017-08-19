@@ -281,7 +281,7 @@ class Content_model extends CI_Model {
      * @param	intval	$tableid	模型内容附表id
      * @return  NULL
      */
-    public function delete_for_id($id, $tableid) {
+    public function delete_for_id($id, $tableid = 0) {
 
         if (!$id) {
             return NULL;
