@@ -70,7 +70,7 @@ class Content_model extends CI_Model {
                 $select->where('updatetime BETWEEN '.$data['start'].' AND '.$data['end']);
             } elseif (isset($data['end']) && $data['end']) {
                 $data['end'] = strtotime(date('Y-m-d 23:59:59', $data['end']));
-                $data['start'] = 0;
+                $data['start'] = 1;
                 $select->where('updatetime BETWEEN '.$data['start'].' AND '.$data['end']);
             }
         }
