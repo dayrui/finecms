@@ -303,10 +303,11 @@ function dr_get_cat_pname($mod, $cat, $symbol = '_') {
 	if (!$cat['pids']) {
         return $cat['name'];
     }
-	
+
+    $ci = &get_instance();
 	$name = array();
 	$array = explode(',', $cat['pids']);
-    $category = &get_instance()->get_cache('category-'.SITE_ID);
+    $category = $ci->get_cache('category-'.SITE_ID);
 	
 	foreach ($array as $id) {
         $id && $category[$id] && $name[] = $category[$id]['name'];
@@ -334,8 +335,8 @@ function dr_get_cat_pname($mod, $cat, $symbol = '_') {
 function dr_show_seo($data, $page = 1) {
 
 	$seo = array();
-
-    $category = &get_instance()->get_cache('category-'.SITE_ID);
+    $ci = &get_instance();
+    $category = $ci->get_cache('category-'.SITE_ID);
 	$cat = $category[$data['catid']];
     $data['page'] = $page;
 	$data['join'] = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
@@ -430,7 +431,8 @@ function dr_search_seo($mod, $param, $page = 1) {
     $seo['meta_keywords'] = '';
 	$data['page'] = $page > 1 ? $page : '';
     $data['join'] = SITE_SEOJOIN ? SITE_SEOJOIN : '_';
-    $category = &get_instance()->get_cache('category-'.SITE_ID);
+    $ci = &get_instance();
+    $category = $ci->get_cache('category-'.SITE_ID);
     $data['catname'] = $param['catid'] ? dr_get_cat_pname(null, $category[$param['catid']], $data['join']) : '';
     $param['mid'] = $mod['name'];
 

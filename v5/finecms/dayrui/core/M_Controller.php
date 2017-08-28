@@ -733,7 +733,7 @@ class M_Controller extends CI_Controller {
     public function callback_json($data) {
 
         // 自定义返回名称
-        $return = $this->input->get('return');
+        $return = $this->input->get('return', true);
         if (isset($data['error']) && !isset($data['msg'])) {
             $data['msg'] = $data['error'];
             unset($data['error']);
