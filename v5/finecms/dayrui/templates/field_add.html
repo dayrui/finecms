@@ -200,14 +200,14 @@ function dr_confirm_zb(title) {
 								<span class="help-block">{fc_lang('开启之后相关字符会被替换掉')}</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 							<label class="col-md-2 control-label">{fc_lang('校验函数/方法')}：</label>
 							<div class="col-md-9">
 								<label><input class="form-control" type="text" name="data[setting][validate][check]" value="{$data['setting']['validate']['check']}" id="dr_check" /></label>
 								<span class="help-block">{fc_lang('例如对会员名的重复验证等，格式参考手册，请勿乱填')}</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 							<label class="col-md-2 control-label">{fc_lang('过滤函数')}：</label>
 							<div class="col-md-9">
 								<label><input class="form-control" type="text" name="data[setting][validate][filter]" value="{$data['setting']['validate']['filter']}" id="dr_filter" /></label>
@@ -240,7 +240,7 @@ function dr_confirm_zb(title) {
 								<span class="help-block">{fc_lang('禁用了就不能使用')}</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 							<label class="col-md-2 control-label">{fc_lang('在表单哪个位置显示')}：</label>
 							<div class="col-md-9">
 								<div class="radio-list">
@@ -253,7 +253,7 @@ function dr_confirm_zb(title) {
 								</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 							<label class="col-md-2 control-label">{fc_lang('后台不显示该字段')}：</label>
 							<div class="col-md-9">
 								<div class="checkbox-list">
@@ -274,7 +274,7 @@ function dr_confirm_zb(title) {
 								<span class="help-block">{fc_lang('如果想前端表单或者会员中心不显示那么请选择“否”，否则选“是”')}</span>
 							</div>
 						</div>
-						<div class="form-group">
+						<div class="form-group hide">
 							<label class="col-md-2 control-label">{fc_lang('前端不显示该字段')}：</label>
 							<div class="col-md-9">
 								<div class="checkbox-list">
