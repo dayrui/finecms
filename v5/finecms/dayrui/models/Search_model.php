@@ -7,7 +7,7 @@
  * @开发组自愿者  邢鹏程 刘毅 陈锦辉 孙华军
  */
 
-class Search_model extends CI_Model {
+class Search_model extends M_Model {
 
     private $dir;
 

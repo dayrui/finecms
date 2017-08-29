@@ -7,7 +7,7 @@
  * @开发组自愿者  邢鹏程 刘毅 陈锦辉 孙华军
  */
 	
-class Site_model extends CI_Model {
+class Site_model extends M_Model {
 
 	public $config;
 

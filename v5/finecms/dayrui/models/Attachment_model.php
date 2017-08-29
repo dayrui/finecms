@@ -9,7 +9,7 @@
  */
 
 	
-class Attachment_model extends CI_Model {
+class Attachment_model extends M_Model {
 
     public $siteid;
     public $domain;
