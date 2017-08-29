@@ -1,7 +1,6 @@
 <?php
 
-
-class Member_model extends CI_Model {
+class Member_model extends M_Model {
 
     /**
      * 会员修改信息

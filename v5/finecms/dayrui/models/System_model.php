@@ -6,7 +6,7 @@
  * @开发组自愿者  邢鹏程 刘毅 陈锦辉 孙华军
  */
 	
-class System_model extends CI_Model {
+class System_model extends M_Model {
 
     /*
      * 保存配置文件

@@ -7,7 +7,7 @@
  * @开发组自愿者  邢鹏程 刘毅 陈锦辉 孙华军
  */
 
-class Content_model extends CI_Model {
+class Content_model extends M_Model {
 
     public $mdir;
     public $prefix;

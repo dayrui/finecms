@@ -4,7 +4,7 @@ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 
 	
-class Linkage_model extends CI_Model {
+class Linkage_model extends M_Model {
 
 	private	$categorys;
 	
