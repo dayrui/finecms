@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -125,14 +125,14 @@ class CI_Exceptions {
 		}
 		else
 		{
-			$heading = '404';
-			$message = '系统无法识别此页面';
+			$heading = '404 Page Not Found';
+			$message = 'The page you requested was not found.';
 		}
 
 		// By default we log this, but allow a dev to skip it
 		if ($log_error)
 		{
-			#log_message('error', $heading.': '.$page);
+			log_message('error', $heading.': '.$page);
 		}
 
 		echo $this->show_error($heading, $message, 'error_404', 404);
@@ -231,7 +231,7 @@ class CI_Exceptions {
 	 * @param	string	$message	Error message
 	 * @param	string	$filepath	File path
 	 * @param	int	$line		Line number
-	 * @return	string	Error page output
+	 * @return	void
 	 */
 	public function show_php_error($severity, $message, $filepath, $line)
 	{

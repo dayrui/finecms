@@ -6,7 +6,7 @@
  *
  * This content is released under the MIT License (MIT)
  *
- * Copyright (c) 2014 - 2016, British Columbia Institute of Technology
+ * Copyright (c) 2014 - 2017, British Columbia Institute of Technology
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@
  * @package	CodeIgniter
  * @author	EllisLab Dev Team
  * @copyright	Copyright (c) 2008 - 2014, EllisLab, Inc. (https://ellislab.com/)
- * @copyright	Copyright (c) 2014 - 2016, British Columbia Institute of Technology (http://bcit.ca/)
+ * @copyright	Copyright (c) 2014 - 2017, British Columbia Institute of Technology (http://bcit.ca/)
  * @license	http://opensource.org/licenses/MIT	MIT License
  * @link	https://codeigniter.com
  * @since	Version 1.0.0
@@ -155,7 +155,7 @@ class CI_Lang {
 
 		if ( ! isset($lang) OR ! is_array($lang))
 		{
-			#log_message('error', 'Language file contains no data: language/'.$idiom.'/'.$langfile);
+			log_message('error', 'Language file contains no data: language/'.$idiom.'/'.$langfile);
 
 			if ($return === TRUE)
 			{
@@ -170,9 +170,9 @@ class CI_Lang {
 		}
 
 		$this->is_loaded[$langfile] = $idiom;
-		$this->language = $this->language + $lang;
+		$this->language = array_merge($this->language, $lang);
 
-		#log_message('info', 'Language file loaded: language/'.$idiom.'/'.$langfile);
+		log_message('info', 'Language file loaded: language/'.$idiom.'/'.$langfile);
 		return TRUE;
 	}
 
@@ -194,7 +194,7 @@ class CI_Lang {
 		// Because killer robots like unicorns!
 		if ($value === FALSE && $log_errors === TRUE)
 		{
-			#log_message('error', 'Could not find the language line "'.$line.'"');
+			log_message('error', 'Could not find the language line "'.$line.'"');
 		}
 
 		return $value;
