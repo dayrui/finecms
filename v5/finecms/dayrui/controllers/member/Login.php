@@ -22,8 +22,7 @@ class Login extends M_Controller {
 
 		if (IS_POST) {
 			$data = $this->input->post('data', TRUE);
-			$back_url = $_POST['back'] ? urldecode($this->input->post('back')) : '';
-			$back_url = $back_url && strpos($back_url, 'register') === FALSE ? $back_url : dr_member_url('home/index');
+			$back_url = dr_member_url('home/index');
 			if ($MEMBER['setting']['logincode'] && !$this->check_captcha('code')) {
 				$error = fc_lang('验证码不正确');
 			} elseif (!$data['password'] || !$data['username']) {
@@ -195,11 +194,11 @@ class Login extends M_Controller {
 	public function out() {
 		if (IS_AJAX) {
 			exit(json_encode(array(
-				'backurl' => isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : SITE_URL,
+				'backurl' => SITE_URL,
 				'syncurl' => dr_member_sync_url($this->member_model->logout()))));
 		} else {
 			$this->template->assign('member', '');
-			$this->member_msg(fc_lang('您已经成功退出了').$this->member_model->logout(), isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : SITE_URL, 1, 3);
+			$this->member_msg(fc_lang('您已经成功退出了').$this->member_model->logout(), SITE_URL, 1, 3);
 		}
 	}
 

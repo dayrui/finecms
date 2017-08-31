@@ -764,7 +764,7 @@ class M_Controller extends CI_Controller {
         IS_AJAX && exit(dr_json(($mark ? 1 : 0), $msg, $url));
         $this->template->assign(array(
             'msg' => $msg,
-            'url' => $url,
+            'url' => $this->security->xss_clean($url),
             'time' => $time,
             'mark' => $mark,
             'cache_url' => IS_ADMIN && IS_PC ? $this->_cache_url() : array(),
@@ -791,7 +791,7 @@ class M_Controller extends CI_Controller {
         } else {
             $this->template->assign(array(
                 'msg' => $msg,
-                'url' => $url,
+                'url' => $this->security->xss_clean($url),
                 'time' => $time,
                 'mark' => $mark,
                 'meta_name' => fc_lang('提示信息')
@@ -815,7 +815,7 @@ class M_Controller extends CI_Controller {
         IS_AJAX && exit(dr_json(($mark ? 1 : 0), $msg, $url));
         $this->template->assign(array(
             'msg' => $msg,
-            'url' => $url,
+            'url' => $this->security->xss_clean($url),
             'time' => $time,
             'mark' => $mark
         ));
@@ -836,7 +836,7 @@ class M_Controller extends CI_Controller {
     public function mini_msg($msg, $url = '', $mark = 0, $time = 1) {
         $this->template->assign(array(
             'msg' => $msg,
-            'url' => $url,
+            'url' => $this->security->xss_clean($url),
             'time' => $time,
             'mark' => $mark
         ));
@@ -854,7 +854,7 @@ class M_Controller extends CI_Controller {
      */
     protected function pay_msg($msg, $url = '', $mark = 0) {
         $this->template->assign(array(
-            'url' => $url,
+            'url' => $this->security->xss_clean($url),
             'msg' => $msg,
             'mark' => $mark,
         ));
@@ -1672,7 +1672,7 @@ class M_Controller extends CI_Controller {
         if (!$this->uid) {
             // 未登录
             if (isset($_GET['jsonp']) && $_GET['jsonp']) {
-                echo $this->input->get('callback', TRUE).'('.json_encode(array('code' => '1')).')';exit;
+                echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.json_encode(array('code' => '1')).')';exit;
             } else {
                 exit('1');
             }
@@ -1686,7 +1686,7 @@ class M_Controller extends CI_Controller {
         if (!$data) {
             // 文档不存在
             if (isset($_GET['jsonp']) && $_GET['jsonp']) {
-                echo $this->input->get('callback', TRUE).'('.json_encode(array('code' => '2')).')';exit;
+                echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.json_encode(array('code' => '2')).')';exit;
             } else {
                 exit('2');
             }
@@ -1704,7 +1704,7 @@ class M_Controller extends CI_Controller {
                 ));
                 // 更新成功
                 if (isset($_GET['jsonp']) && $_GET['jsonp']) {
-                    echo $this->input->get('callback', TRUE).'('.json_encode(array('code' => '3')).')';exit;
+                    echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.json_encode(array('code' => '3')).')';exit;
                 } else {
                     exit('3');
                 }
@@ -1722,7 +1722,7 @@ class M_Controller extends CI_Controller {
                 $c = $this->db->where('eid', $eid)->count_all_results($table);
                 $this->db->where('id', $eid)->set('favorites', $c)->update(SITE_ID.'_'.APP_DIR.'_extend');
                 if (isset($_GET['jsonp']) && $_GET['jsonp']) {
-                    echo $this->input->get('callback', TRUE).'('.json_encode(array('code' => '4')).')';exit;
+                    echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.json_encode(array('code' => '4')).')';exit;
                 } else {
                     exit('4');
                 }
@@ -1736,7 +1736,7 @@ class M_Controller extends CI_Controller {
                 ));
                 // 更新成功
                 if (isset($_GET['jsonp']) && $_GET['jsonp']) {
-                    echo $this->input->get('callback', TRUE).'('.json_encode(array('code' => '3')).')';exit;
+                    echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.json_encode(array('code' => '3')).')';exit;
                 } else {
                     exit('3');
                 }
@@ -1754,7 +1754,7 @@ class M_Controller extends CI_Controller {
                 $c = $this->db->where('cid', $mid)->count_all_results($table);
                 $this->db->where('id', $mid)->set('favorites', $c)->update(SITE_ID.'_'.APP_DIR);
                 if (isset($_GET['jsonp']) && $_GET['jsonp']) {
-                    echo $this->input->get('callback', TRUE).'('.json_encode(array('code' => '4')).')';exit;
+                    echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.json_encode(array('code' => '4')).')';exit;
                 } else {
                     exit('4');
                 }
@@ -1845,7 +1845,7 @@ class M_Controller extends CI_Controller {
     // jsonp 格式返回
     public function return_jsonp($data) {
 
-        echo $this->input->get('callback', TRUE).'('.$data.')';exit;
+        echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$data.')';exit;
     }
 
 

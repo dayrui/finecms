@@ -22,7 +22,7 @@ class Api extends M_Controller {
 		// 页面输出
 		if ($format == 'jsonp') {
 			$data = $this->callback_json(array('html' => $html));
-			echo $this->input->get('callback', TRUE).'('.$data.')';
+			echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$data.')';
 		} elseif ($format == 'json') {
 			echo $this->callback_json(array('html' => $html));
 		} else {
@@ -65,7 +65,7 @@ class Api extends M_Controller {
             echo 'document.write("'.addslashes(str_replace(array("\r", "\n", "\t", chr(13)), array('', '', '', ''), $html)).'");';
         } else {
             $data = $this->callback_json(array('html' => $html));
-            echo $this->input->get('callback', TRUE).'('.$data.')';
+            echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$data.')';
         }
     }
 
@@ -79,7 +79,7 @@ class Api extends M_Controller {
         $mod = $this->module[$dir];
         if (!$mod) {
             $data = $this->callback_json(array('html' => 0));
-            echo $this->input->get('callback', TRUE).'('.$data.')';exit;
+            echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$data.')';exit;
         }
 
         // 获取主表时间段
@@ -94,7 +94,7 @@ class Api extends M_Controller {
 		$this->db->where('id', $id)->update(SITE_ID.'_'.$dir, array('hits' => $hits));
 
         // 输出数据
-        echo $this->input->get('callback', TRUE).'('.$this->callback_json(array('html' => $hits)).')';exit;
+        echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$this->callback_json(array('html' => $hits)).')';exit;
 	}
 
 

@@ -28,7 +28,7 @@ class Login extends M_Controller {
 				$p = $this->input->post('password', true);
                 $uid = $this->member_model->admin_login($u, $p);
                 if ($uid > 0) {
-                    $url = $this->input->get('backurl') ? urldecode($this->input->get('backurl')) : dr_url('home');
+                    $url = $this->input->get('backurl') ? urldecode($this->input->get('backurl', true)) : dr_url('home');
                     $url = pathinfo($url);
                     $url = $url['basename'] ? $url['basename'] : SELF;
                     $this->admin_msg(fc_lang('登录成功'), $url, 1);
