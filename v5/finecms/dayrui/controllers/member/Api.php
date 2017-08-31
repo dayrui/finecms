@@ -836,7 +836,7 @@ class Api extends M_Controller {
         $mod = $this->get_cache('space-model', $mid);
         if (!$mod) {
             $data = $this->callback_json(array('html' => 0));
-            echo $this->input->get('callback', TRUE).'('.$data.')';exit;
+            echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$data.')';exit;
         }
 
         $table = $this->db->dbprefix('space_'.$mod['table']);
@@ -852,7 +852,7 @@ class Api extends M_Controller {
         $this->db->where('id', $id)->update($table, array('hits' => $hits));
 
         $data = $this->callback_json(array('html' => $hits));
-        echo $this->input->get('callback', TRUE).'('.$data.')';exit;
+        echo dr_safe_replace(dr_safe_replace($this->input->get('callback', TRUE))).'('.$data.')';exit;
     }
 
 
