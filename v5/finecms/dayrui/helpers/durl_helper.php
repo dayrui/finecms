@@ -725,7 +725,8 @@ function dr_now_url() {
     
     $pageURL.= $_SERVER['REQUEST_URI'] ? $_SERVER['REQUEST_URI'] : $_SERVER['PHP_SELF'];
 
-    return $pageURL;
+    $ci	= &get_instance();
+    return $ci->security->xss_clean($pageURL);
 }
 
 /**
