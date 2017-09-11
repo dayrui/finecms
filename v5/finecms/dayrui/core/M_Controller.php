@@ -1329,17 +1329,19 @@ class M_Controller extends CI_Controller {
                 // 百度地图特殊字段
                 $obj->remove_div = 0;
                 $value = $t['fieldtype'] == 'Baidumap' ? ($data[$t['fieldname'].'_lng'] && $data[$t['fieldname'].'_lat'] ? $data[$t['fieldname'].'_lng'].','.$data[$t['fieldname'].'_lat'] : $data[$t['fieldname']]) : $data[$t['fieldname']];
-                $input = $obj->input($t['name'], $t['fieldname'], $t['setting'], $value, isset($data[$id]) ? $data[$id] : 0);
+
                 if (isset($group[$t['fieldname']])) {
                     // 属于分组字段,重新获取字段表单
                     $obj->remove_div = 1;
                     $mygroup[$t['fieldname']] = $obj->input($t['name'], $t['fieldname'], $t['setting'], $value, isset($data[$id]) ? $data[$id] : 0);
                 } elseif (isset($merge[$t['fieldname']])) {
                     // 属于合并字段
+                    $input = $obj->input($t['name'], $t['fieldname'], $t['setting'], $value, isset($data[$id]) ? $data[$id] : 0);
                     $mymerge[$t['fieldname']] = $input;
                 } elseif ($t['fieldtype'] == 'Merge') {
                     $myfield.= '{merge_'.$t['fieldname'].'}';
                 } else {
+                    $input = $obj->input($t['name'], $t['fieldname'], $t['setting'], $value, isset($data[$id]) ? $data[$id] : 0);
                     $myfield.= $input;
                 }
             }

@@ -1403,6 +1403,19 @@ function dr_get_order_string($str, $order) {
 
 }
 
+// 文件上传临时目录
+function dr_upload_temp_path() {
+
+    if (function_exists('ini_get')) {
+        $path = ini_get('upload_tmp_dir');
+        if ($path) {
+            return rtrim($path, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR;
+        }
+    }
+
+    return WEBPATH.'cache/file/';
+}
+
 // 兼容性判断
 if (!function_exists('ctype_digit')) {
     function ctype_digit($num) {
